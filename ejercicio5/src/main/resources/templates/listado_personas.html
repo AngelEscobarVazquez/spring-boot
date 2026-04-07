@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Personas</title>
+    <style>
+        table { width: 80%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+<h1>Listado de 10 Personas Aleatorias</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nombre Completo</th>
+        <th>DNI</th>
+        <th>Fecha Nacimiento</th>
+        <th>Edad</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${lista}">
+        <td th:text="${p.nombre} + ' ' + ${p.apellidos}">Nombre Ficticio</td>
+        <td th:text="${p.dni}">12345678X</td>
+        <td th:text="${p.fechaNacimiento}">2000-01-01</td>
+        <td th:text="${p.getEdad()} + ' años'">00</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/">Volver a la página principal</a> |
+<a href="/persona/una">Ver detalles de la persona</a>
+
+</body>
+</html>

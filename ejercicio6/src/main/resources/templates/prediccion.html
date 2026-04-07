@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción Meteorológica</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; }
+        table { width: 95%; border-collapse: collapse; margin: 20px auto; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #f4f4f4; }
+        .verde { background-color: #98fb98; }
+        .naranja { background-color: #ffcc00; }
+        .rojo { background-color: #ff6666; color: white; }
+        .temp-min { color: blue; font-weight: bold; }
+        .temp-max { color: red; font-weight: bold; }
+        img { width: 45px; display: block; margin: 0 auto 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Predicción Meteorológica</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th th:each="dia : ${semana}" th:text="${#temporals.format(dia.fecha, 'dd/MM')}">01/01</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:each="dia : ${semana}">
+            <img th:if="${dia.probPrecipitacion < 25}" src="https://www.aemet.es/imagenes/png/estado_cielo/11_g.png">
+            <img th:if="${dia.probPrecipitacion >= 25 && dia.probPrecipitacion < 50}" src="https://www.aemet.es/imagenes/png/estado_cielo/12_g.png">
+            <img th:if="${dia.probPrecipitacion >= 50 && dia.probPrecipitacion < 75}" src="https://www.aemet.es/imagenes/png/estado_cielo/14_g.png">
+            <img th:if="${dia.probPrecipitacion >= 75}" src="https://www.aemet.es/imagenes/png/estado_cielo/25_g.png">
+
+            <span th:text="${dia.probPrecipitacion} + '%'">0%</span>
+        </td>
+    </tr>
+    <tr>
+        <td th:each="dia : ${semana}">
+            <span class="temp-min" th:text="${dia.tempMin}">0</span> /
+            <span class="temp-max" th:text="${dia.tempMax}">20</span>
+        </td>
+    </tr>
+    <tr>
+        <td th:each="dia : ${semana}"
+            th:text="'UV: ' + ${dia.nivelUV}"
+            th:class="${dia.nivelUV <= 1 ? 'verde' : (dia.nivelUV <= 3 ? 'naranja' : 'rojo')}">
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+<a href="/">Volver a la página principal</a>
+
+</body>
+</html>

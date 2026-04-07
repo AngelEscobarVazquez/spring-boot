@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle de Persona</title>
+    <style>
+        .ficha { border: 2px solid #333; padding: 20px; width: 300px; border-radius: 10px; background-color: #f0f8ff; margin: 20px auto; }
+        h2 { border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        p { font-size: 1.1em; line-height: 1.6; }
+        .label { font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center;">Datos de la Persona</h1>
+
+<div class="ficha">
+    <h2>Ficha de Identidad</h2>
+    <p><span class="label">Nombre:</span> <span th:text="${persona.nombre}">---</span></p>
+    <p><span class="label">Apellidos:</span> <span th:text="${persona.apellidos}">---</span></p>
+    <p><span class="label">DNI:</span> <span th:text="${persona.dni}">---</span></p>
+    <p><span class="label">F. Nacimiento:</span> <span th:text="${persona.fechaNacimiento}">---</span></p>
+    <hr>
+    <p><span class="label">Edad Actual:</span> <span th:text="${persona.getEdad()} + ' años'">---</span></p>
+</div>
+<div style="text-align: center;">
+    <a href="/personas">Ir al listado</a> |
+    <a href="/">Volver al inicio</a>
+</div>
+
+</body>
+</html>
